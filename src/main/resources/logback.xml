@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <property name="spring.application.name" value="platoref" scope="context"/>
+    <property name="logPath" value="${plato.service.logging.path}"></property>
+    <property name="loggerLevel" value="${plato.service.logging.level:-INFO}"></property>
+    <property name="logFileMaxSize" value="${plato.service.logging.rolling.maxSize:-5MB}"></property>
+    <property name="logPattern" value="%d{HH:mm:ss:SSS} | %-5level | %logger{20} | %msg%n%rEx"></property>
+    <appender name="SIFT" class="ch.qos.logback.classic.sift.SiftingAppender">
+    <discriminator>
+    <key>logFileName</key>
+    <defaultValue>${logPath}/${spring.application.name}</defaultValue>
+    </discriminator>
+ 	<sift>
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logFileName}.log</file>       
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${logFileName}.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>${logFileMaxSize}</maxFileSize>
+            <!-- <maxHistory>30</maxHistory>
+            <totalSizeCap>3GB</totalSizeCap> -->           
+        </rollingPolicy>     
+        <encoder>
+            <pattern>${logPattern}</pattern>
+            <charset>utf8</charset>
+        </encoder>
+    </appender>
+ 	</sift>
+ 	</appender>
+    <root level="${loggerLevel}">
+        <appender-ref ref="SIFT" />
+    </root>
+</configuration>

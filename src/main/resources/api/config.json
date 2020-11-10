@@ -1,0 +1,9 @@
+{
+  "library": "spring-mvc",
+  "dateLibrary": "java8",
+  "hideGenerationTimestamp": true,
+  "modelPackage": "oracle.fsgbu.plato.customer.api.model",
+  "apiPackage": "oracle.fsgbu.plato.customer.api",
+  "invokerPackage": "oracle.fsgbu.plato.customer",
+  "serializableModel": true
+}

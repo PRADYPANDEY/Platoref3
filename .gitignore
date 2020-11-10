@@ -1,0 +1,58 @@
+#### Gradle ####
+**/.gradle
+**/build/
+**/bin/
+**/target/
+**/logs/
+
+# Ignore Gradle GUI config
+gradle-app.setting
+
+# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+!gradle-wrapper.jar
+
+# Cache of project
+.gradletasknamecache
+
+# Checkstyle
+**/.checkstyle
+
+#### Eclipse ####
+.metadata
+**/bin/
+**/tmp/
+**/*.tmp
+**/*.bak
+**/*.swp
+**/*~.nib
+**/local.properties
+**/.settings/
+**/.loadpath
+**/.recommenders
+
+# Eclipse Core
+**/.project
+
+# External tool builders
+**/.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+**/*.launch
+
+# JDT-specific (Eclipse Java Development Tools)
+**/.classpath
+
+# Java annotation processor (APT)
+**/.factorypath
+
+# sbteclipse plugin
+**/.target
+
+# STS (Spring Tool Suite)
+**/.springBeans
+
+# IntelliJ IDEA
+**/.idea
+**/*.iml
+**/*.ipr
+**/*.iws

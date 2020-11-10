@@ -1,0 +1,201 @@
+swagger: "2.0"
+info:
+  description: "This is a sample server Customer server.  You can find out more about Swagger at [swagger.io](http://swagger.io) and about data types at [Swagger Data Types](https://swagger.io/docs/specification/data-models/data-types/)"
+  version: "1.0.0"
+  title: "Customer Service"
+host: "api-plato.us.oracle.com:8080"
+basePath: "/api/1.0"
+consumes:
+  - "application/json"
+  - "application/xml"
+produces:
+  - "application/json"
+  - "application/xml"
+tags:
+  - name: "CustomerAPI"
+    description: "API for Customer's Operations"
+    
+schemes:
+- "https"
+
+paths:
+  /customer:
+    post:
+      tags:
+        - "CustomerAPI"
+      summary: "Adds a new customer."
+      description: "Adds a new customer. Add additional information here for this endpoint."
+      operationId: "addCustomer"
+      parameters:
+        - name: "customer"
+          in: "body"
+          description: "Request Body that contains data required for creating a new customer"
+          required: true
+          schema:
+            $ref: "#/definitions/CustomerModel"
+      responses:
+        201:
+          description: "Returns the Id of the newly created customer"
+          headers:
+            Location:
+              description: "URL of newly created customer"
+              type: "string"
+          schema:
+              type: "object"
+              description: "Id of the newly created customer"
+              properties:
+                id:
+                  type: "string"
+        400:
+          description: "Malformed syntax."
+        401:
+          description: "Request does not have sufficient credentials."
+        403:
+          description: "Request is not authorized."
+        405:
+          description: "Invalid input"
+        500:
+          description: "Internal error"
+    get:
+      tags:
+        - "CustomerAPI"
+      summary: "Retrieves the list of existing customers."
+      description:  "Retrieves the list of existing customers. Add additional information here for the this endpoint."
+      operationId: "getAllCustomers"
+      responses:
+        200:
+          description: "Successful performs the operation"
+          schema:
+            $ref: "#/definitions/CustomerCollection"
+        400:
+          description: "Malformed syntax."
+        401:
+          description: "Request does not have sufficient credentials."
+        403:
+          description: "Request is not authorized."
+        500:
+          description: "Internal error"
+  /customer/{id}:
+    get:
+      tags:
+        - "CustomerAPI"
+      summary: "Retrieves the customer by ID."
+      description:  "Retrieves the customer by ID. Add additional information here for the this endpoint."
+      operationId: "getCustomerById"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "Id of the user that needs to be fetched"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "Returns the customer based on given id."
+          schema:
+            $ref: "#/definitions/CustomerModel"
+        400:
+          description: "Malformed syntax."
+        401:
+          description: "Request does not have sufficient credentials."
+        403:
+          description: "Request is not authorized."
+        500:
+          description: "Internal error"
+    put:
+      tags:
+        - "CustomerAPI"
+      summary: "Update an existing customer."
+      description:  "Update an existing customer. Add additional information here for the this endpoint."
+      operationId: "updateCustomer"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "id of the customer that need to be updated"
+          required: true
+          type: "string"      
+        - name: "customer"
+          in: "body"
+          description: "Request Body that contains data required for updating an existing customer"
+          required: true
+          schema:
+            $ref: "#/definitions/CustomerModel"
+      responses:
+        200:
+          description: "Returns updated customer"
+          schema:
+            $ref: "#/definitions/CustomerModel"
+        400:
+          description: "Malformed syntax."
+        401:
+          description: "Request does not have sufficient credentials."
+        403:
+          description: "Request is not authorized."
+        405:
+          description: "Invalid input"
+        500:
+          description: "Internal error"          
+    delete:
+      tags:
+        - "CustomerAPI"
+      summary: "Deletes the customer identified by given ID."
+      description:  "eletes the customer identified by given ID. Add additional information here for the this endpoint."
+      operationId: "deleteCustomer"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "Id of the user that needs to be fetched"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "Successful operation."
+        400:
+          description: "Malformed syntax."
+        401:
+          description: "Request does not have sufficient credentials."
+        403:
+          description: "Request is not authorized."
+        500:
+          description: "Internal error"    
+definitions:
+  CustomerModel:
+    description: "Customer model"
+    type: "object"
+    properties:
+      id:
+        description: "Id of the customer"
+        type: "integer"
+        format: "int64"
+      firstName:
+        description: "First name of the customer"
+        type: "string"
+      lastName:
+        description: "Last name of the customer"
+        type: "string"
+      age:
+        description: "Age of the customer"
+        type: "integer"
+        format: "int64"
+      sex:
+        description: "Sex of the customer"
+        type: "string"
+      phone:
+        description: "Phone of the customer"
+        type: "string"
+      email:
+        description: "Email of the customer"
+        type: "string"        
+      county:
+        description: "County of the customer"
+        type: "string"
+      country:
+        description: "Country of the customer"
+        type: "string"
+  CustomerCollection:
+    description: "Collection of customers."
+    type: "object"
+    properties:
+      CustomerList:
+        type: "array"
+        items:
+          $ref: "#/definitions/CustomerModel"

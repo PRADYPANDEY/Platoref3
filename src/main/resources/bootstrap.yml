@@ -1,0 +1,19 @@
+# Copyright (c) 2016, Oracle. All rights reserved.
+spring:
+  application:
+    name: platoref
+  cloud:
+    config:
+# Replace the hostname or IP in this URL and change your port accordingly
+      uri: ${plato.services.config.uri:http://HOSTNAME_OR_IP:7001}/config-service
+#      uri: ${plato.services.config.uri:http://DGHODEKA-IN.in.oracle.com:7002}/config-service
+      fail-fast: false
+      label: jdbc
+  profiles:
+    active: jdbc
+management:
+  security:
+    enabled: false
+
+server:
+  port: ${plato.services.platoref.port:7001}

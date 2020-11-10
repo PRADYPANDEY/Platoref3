@@ -1,0 +1,47 @@
+# Copyright (c) 2016, Oracle. All rights reserved.
+spring:
+  application:
+    name: platoref
+  jmx:
+    default-domain: platoref
+  endpoints:
+    jmx:
+      domain: platoref
+      unique-names: true    
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration, org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
+  sleuth:
+    sampler:
+      percentage: 0.1
+  zipkin:
+    baseUrl: ${plato.services.zipkin.url:http://localhost:9411}
+
+eureka:
+  instance:
+    prefer-ip-address: false
+    securePortEnabled: ${isSslEnabled:false}
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+#    preferSameZone: true
+    shouldUseDns: false
+    serviceUrl:
+# Replace the hostname or IP in this URL and change your port accordingly
+      defaultZone: ${plato.services.eureka.uri:http://HOSTNAME_OR_IP:7001}/plato-discovery-service/eureka
+#      defaultZone: ${plato.services.eureka.uri:http://DGHODEKA-IN.in.oracle.com:7002}/plato-discovery-service/eureka
+#      defaultZone: ${plato.services.eureka.uri:http://ofss3121203:7003}/plato-discovery-service/eureka
+    ConnectTimeout: 10000
+    ReadTimeout: 10000
+
+feign:
+  client:
+    config:
+      feignName:
+        connectTimeout: 10000
+        readTimeout: 10000
+
+ribbon:
+  ReadTimeout: 20000
+  ConnectTimeout: 20000
+  eureka:
+    enabled: true
